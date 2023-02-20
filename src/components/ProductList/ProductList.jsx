@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import ProductItem from '../ProductItem/ProductItem';
-import { useTelegram } from '../../hooks/useTelegram';
 import './ProductList.css';
+import ProductItem from "../ProductItem/ProductItem";
+import {useTelegram} from "../../hooks/useTelegram";
+import {useCallback, useEffect} from "react";
 
 const products = [
     {id: '1', title: 'Джинсы', price: 5000, description: 'Синего цвета, прямые'},
@@ -35,7 +36,7 @@ const ProductList = () => {
 
         setAddedItems(newItems)
 
-        if(newItems ===0) {
+        if(newItems.length === 0) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
@@ -47,7 +48,7 @@ const ProductList = () => {
 
     return (
         <div className={'list'}>
-            {ProductList.map(item => (
+            {products.map(item => (
                 <ProductItem
                     product={item}
                     onAdd={onAdd}
